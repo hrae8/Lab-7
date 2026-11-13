@@ -26,19 +26,40 @@ glimpse(college_grad_df)
 # Exercise 1: Exploratory Data Analysis
 
 ```{r}
-#your code here
+ggplot(data = college_grad_df, 
+       mapping = aes(x = median)) +
+  geom_histogram(binwidth = 2500, 
+  fill = "darkcyan", 
+  colour = "darkblue") + 
+  labs(
+    x = "Median",
+    y = "Frequency",
+    title = "Median histogram"
+  )
+college_recent_grads %>% select(major_category, sharewomen, median) %>% arrange(desc(sharewomen))
 ```
 
-*Your explanation*
 
 
 # Exercise 2: Exploring relationship
 
 ```{r}
-#your code here
+ggplot(data = college_grad_df, 
+       mapping = aes(
+         x = sharewomen,   
+         y = median
+         )) +
+  geom_point() +  
+  geom_smooth(method = lm, se = FALSE) +
+  labs(
+    x = "share of women",
+    y = "median earnings",
+    title = "median earnings for women")
+
 ```
 
-*Your explanation*
+a) share women = explanatory variable, median = response variable 
+b) line of best fit is a decreasing slope, higher share of women does correlate do having lower median earnings 
 
 # Exercise 3: Fit and interpret a numerical predictor
 
