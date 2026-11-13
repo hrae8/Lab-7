@@ -491,13 +491,38 @@ ggplot(augmented_data, aes(x =.fitted, y = .resid)) +
 <pre><code>## NULL</code></pre>
 <ol style="list-style-type: lower-alpha">
 <li>predicted median = (56093 - 30670) x sharewomen</li>
-<li></li>
+<li>no clear pattern but many cluster around the 0 line</li>
 </ol>
 </div>
 <div id="exercise-4-consider-a-categorical-variable-instead" class="section level1">
 <h1>Exercise 4: Consider a categorical variable instead</h1>
-<pre class="r"><code>#your code here</code></pre>
-<p><em>Your explanation</em></p>
+<pre class="r"><code>library(tidyverse)
+college_recent_grads &lt;- college_recent_grads %&gt;%
+  mutate(engineering = ifelse(major_category == &quot;Engineering&quot;, &quot;engineering&quot;, &quot;other&quot;))
+engineering_fit &lt;- lm(median ~ engineering, data = college_recent_grads)
+summary(engineering_fit)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = median ~ engineering, data = college_recent_grads)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -17383  -4681  -1681   3319  52617 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)         57383       1574   36.46   &lt;2e-16 ***
+## engineeringother   -20702       1725  -12.00   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8476 on 171 degrees of freedom
+## Multiple R-squared:  0.4571, Adjusted R-squared:  0.454 
+## F-statistic:   144 on 1 and 171 DF,  p-value: &lt; 2.2e-16</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>intercept = 57383, slope = -20702, baseline = engineering because e
+comes before o</li>
+</ol>
 <hr />
 <div id="data-set-beauty-in-the-classroom" class="section level2">
 <h2>Data set: Beauty in the classroom</h2>

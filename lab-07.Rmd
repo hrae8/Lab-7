@@ -82,15 +82,19 @@ ggplot(augmented_data, aes(x =.fitted, y = .resid)) +
 ```
 
 a) predicted median = (56093 - 30670) x sharewomen
-b) 
+b) no clear pattern but many cluster around the 0 line 
 
 # Exercise 4: Consider a categorical variable instead 
 
 ```{r}
-#your code here
+library(tidyverse)
+college_recent_grads <- college_recent_grads %>%
+  mutate(engineering = ifelse(major_category == "Engineering", "engineering", "other"))
+engineering_fit <- lm(median ~ engineering, data = college_recent_grads)
+summary(engineering_fit)
 ```
 
-*Your explanation*
+b) intercept = 57383, slope = -20702, baseline = engineering because e comes before o 
 
 ---
 
